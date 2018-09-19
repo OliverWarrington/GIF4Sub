@@ -1,5 +1,10 @@
 function [] = createGif( anat_dir )
+%The function expects a path to the directory with the MP-RAGE file
+%(sMP*.nii). It then saves to the same folder an animated GIF with the
+%saggital slices ordered. 
+% Matan Mazor 2018
 
+%% dependencies: NIfTI toolbox (for load_nii)
 addpath('D:\Documents\software\NIfTI_20140122')
 
 %% OBTAIN FIVE 4D MAPS
