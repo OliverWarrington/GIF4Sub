@@ -4,13 +4,13 @@ function [] = createGif( anat_dir )
 %saggital slices ordered. 
 % Matan Mazor 2018
 
-%% dependencies: NIfTI toolbox (for load_nii)
-addpath('D:\Documents\software\NIfTI_20140122')
+% Oliver version 2021
 
 %% OBTAIN FIVE 4D MAPS
-file = dir(fullfile(anat_dir,'sMP*.nii'));
-cur_map = load_nii(fullfile(anat_dir, file.name));
-cur_map = flip(flip(permute(cur_map.img, [3,2,1]),1),2);
+file = dir(fullfile(anat_dir,'sM*.nii'));
+cur_map = load_nifti(fullfile(anat_dir, file.name));
+%cur_map = flip(flip(permute(cur_map.vol, [1,2,3]),1),2);
+cur_map = rot90(flip(cur_map.vol, 2), 3);
 cur_map(isnan(cur_map(:))) = 0;
 cur_map(isinf(cur_map(:))) = max(cur_map(~isinf(cur_map(:))));
 cur_map = (double(cur_map)/max([double(cur_map(:));10^-10]))*256;
@@ -31,4 +31,3 @@ end
 
 
 end
-
